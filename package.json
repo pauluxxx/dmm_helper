@@ -14,19 +14,24 @@
     "@nestjs/testing": "^5.3.0",
     "@nestjs/websockets": "^5.3.0",
     "copy-webpack-plugin": "^4.5.2",
+    "css-loader": "^1.0.0",
     "extract-text-webpack-plugin": "v4.0.0-alpha.0",
     "hbs": "^4.0.1",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.0.0",
+    "style-loader": "^0.23.0",
     "typescript": "^2.8.0"
   },
   "devDependencies": {
     "@types/node": "^9.3.0",
+    "browser-sync": "^2.24.7",
+    "browser-sync-webpack-plugin": "^2.2.2",
     "ts-loader": "^4.0.0",
     "ts-node": "^6.0.0",
     "tslint": "^5.9.1",
     "webpack": "^4.0.0",
     "webpack-cli": "^2.0.8",
+    "webpack-dev-server": "^3.1.8",
     "webpack-node-externals": "^1.6.0"
   }
 }

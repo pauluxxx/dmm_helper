@@ -3,6 +3,8 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CopyWebpackPlugin = require('copy-webpack-plugin');
+var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+
 module.exports = {
   entry: ['webpack/hot/poll?100', './src/main.ts'],
   watch: true,
@@ -35,9 +37,14 @@ module.exports = {
   },
   plugins: [
       new webpack.HotModuleReplacementPlugin(),
-      new ExtractTextPlugin("styles.css"),
+      new ExtractTextPlugin("assets/styles.css"),
+      new BrowserSyncPlugin({
+          host: 'localhost',
+          port: 3001,
+          proxy: 'http://localhost:3000/'
+      }),
       new CopyWebpackPlugin([
-          {from: 'src/views', to: path.resolve(__dirname, 'dist/views ')}
+          {from: 'src/views', to: path.resolve(__dirname, 'dist/views')}
       ]),],
   output: {
     path: path.join(__dirname, 'dist'),

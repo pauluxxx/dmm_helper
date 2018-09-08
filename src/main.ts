@@ -6,7 +6,6 @@ declare const module: any;
 async function bootstrap() {
     const app = await NestFactory.create(ApplicationModule);
     app.useStaticAssets(path.resolve('dist', 'assets'));
-    console.log(path.resolve('dist', 'assets'));
     app.setBaseViewsDir(path.resolve('dist', 'views'));
     app.setViewEngine('hbs');
     await app.listen(3000);

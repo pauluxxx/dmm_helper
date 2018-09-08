@@ -1,3 +1,37 @@
-body{
-    background: red;
+@custom-media --viewport-medium (width <= 50rem);
+@custom-media --tablet only screen and (max-width: 600px) ;
+@custom-selector :--heading h1, h2, h3, h4, h5, h6;
+:root {
+  $font-main: 'Open Sans';
+  --mainColor: #000;
+  --font-main: $font-main;
+}
+
+@media (--tablet) {
+  $font-main: sans-serif;
+  :root {
+    --mainColor: #000;
+    --font-main: $font-main;
+  }
+  body{
+  }
+}
+body {
+  color: var(--mainColor);
+  font-family: var(--font-main);
+  overflow-wrap: break-word;
+}
+
+:--heading {
+  font-family:var(--font-main);
+  @media (--viewport-medium) {
+    margin-block: 0;
+  }
+}
+
+a {
+  color: blue;
+  &:hover {
+    color: color-mod(var(--mainColor) alpha(80%));
+  }
 }

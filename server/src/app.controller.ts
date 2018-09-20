@@ -9,6 +9,11 @@ export class AppController {
     constructor(private readonly appService: AppService) {
     }
 
+    @Post('/process')
+    processData(@Request() req): string {
+        console.log(req.body.methods);
+        return this.appService.root();
+    }
     @Get('upload')
     root(@Request() req): string {
         console.log(req);

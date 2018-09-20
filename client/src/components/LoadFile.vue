@@ -58,11 +58,10 @@
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss">
     .v-transmit__upload-area {
-        min-height: 40vh;
-        display: flex;
+        display: none;
         align-items: center;
         justify-content: center;
-        border: 1px dashed cornflowerblue;
+        /*border: 1px dashed cornflowerblue;*/
         border-radius: 5px;
     }
 </style>

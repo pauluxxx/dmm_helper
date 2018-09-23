@@ -4,7 +4,10 @@
             All methods ready to process:
         </h2>
         <div v-for="method ,index in allMethods">
-            {{index}}-{{method.Name}}
+            <div v-if="index!==0">
+                {{index}}-{{method.Name}}
+            </div>
+
         </div>
     </div>
 </template>

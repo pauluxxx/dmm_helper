@@ -1,6 +1,18 @@
 <template>
+
     <div class="home">
         <b-container class="bv-example-row" v-if="!currentMethod">
+            <b-row>
+                <b-col>
+                    <b-alert variant="info"
+                             dismissible
+                             :show="showDismissibleAlert"
+                             @dismissed="showDismissibleAlert=false">
+                        Data is send to process.
+                        Pleas Check the result tab.
+                    </b-alert>
+                </b-col>
+            </b-row>
             <b-row>
                 <b-col>
                     <img alt="Puls" src="../assets/puls.png">
@@ -14,7 +26,9 @@
             </b-row>
             <b-row>
                 <b-col>
-                    <b-button variant="primary" v-if="allMethods.length >= 1" @click="processData" class="mt-4">Process Data</b-button>
+                    <b-button variant="primary" v-if="allMethods.length >= 1" @click="processData" class="mt-4">Process
+                        Data
+                    </b-button>
                 </b-col>
             </b-row>
         </b-container>
@@ -40,12 +54,15 @@
             allMethods() {
                 return this.$store.getters.allMethods;
             },
+            showDismissibleAlert() {
+                return this.$store.getters.showDismissibleAlert;
+            },
 
         },
-        methods:{
-            processData(){
-                this.$store.dispatch('PROCESS_DATA',{"methods":this.allMethods})
-            }
+        methods: {
+            processData() {
+                this.$store.dispatch('PROCESS_DATA', {"methods": this.allMethods})
+            },
         },
         components: {
             LoadFile,

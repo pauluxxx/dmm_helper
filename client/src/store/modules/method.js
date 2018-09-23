@@ -1,6 +1,8 @@
 import axios from 'axios';
 
 const state = {
+    showDismissibleAlert: false,
+    results: undefined,
     currentMethod: undefined,
     allMethods: []
 };
@@ -25,8 +27,14 @@ export const method = {
 
 // getters
 const getters = {
+    results(state) {
+        return state.results;
+    },
     currentMethod(state) {
         return state.currentMethod;
+    },
+    showDismissibleAlert(state) {
+        return state.showDismissibleAlert;
     },
     allMethods(state) {
         return state.allMethods;
@@ -35,10 +43,14 @@ const getters = {
 
 // actions
 const actions = {
+    showDismissibleAlert(context, payload) {
+        context.commit('showDismissibleAlert', payload);
+    },
     PROCESS_DATA(context, payload) {
         axios.post('/api/process', payload)
             .then((res) => {
-                console.log(res);
+                context.dispatch('showDismissibleAlert', true);
+                context.commit('SUCCESS_PROCESS_DATA', res.data);
             }).catch(e => {
             console.log(e);
         })
@@ -57,6 +69,12 @@ const actions = {
 };
 // mutations
 const mutations = {
+    showDismissibleAlert(state, payload) {
+        state.showDismissibleAlert = payload;
+    },
+    SUCCESS_PROCESS_DATA(state, payload) {
+        state.results = payload;
+    },
     CREATE_METHOD(state, payload) {
         state.allMethods.push(payload)
     },

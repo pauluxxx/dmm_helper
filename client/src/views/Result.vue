@@ -1,10 +1,11 @@
 <template>
+
     <div class="results">
         <b-container class="bv-example-row">
             <b-row>
                 <b-col>
-                    <h2>Results of computing is </h2>
-                    <b-table items="computedResults"></b-table>
+                    <h2>Results of computing is : </h2>
+                    <b-table striped hover :items="computedResults"></b-table>
                 </b-col>
             </b-row>
         </b-container>
@@ -21,7 +22,7 @@
         name: "Result",
         computed: {
             computedResults() {
-                return this.$store.getters.computedResults;
+                return this.$store.getters.results;
             },
         },
     };

@@ -10,15 +10,48 @@ export class AppController {
     }
 
     @Post('/process')
-    processData(@Request() req): string {
-        console.log(req.body.methods);
-        return this.appService.root();
+    processData(@Request() req): any[] {
+        let result = [];
+        req.body.methods.map((method) => {
+            let sumResults = {ctp: 0, stp: 0, fp: 0};
+            if (method.Classes.length > 0) {
+                method.Classes.map((class_instance) => {
+                    sumResults.ctp += +class_instance.ctp;
+                    sumResults.stp += +class_instance.stp;
+                    sumResults.fp += +class_instance.fp;
+                });
+            }
+            let PC = .4 * sumResults.stp + .6 * sumResults.ctp;
+            let FPC = sumResults.fp;
+            let CC = .3 * PC + .7 * FPC
+            let RC = .1 * method.Relationships.association +
+                .2 * method.Relationships.aggregation +
+                .3 * method.Relationships.composition +
+                .4 * method.Relationships.inheritance;
+            let DMC = .7 * method.Classes.length * CC + .3 * RC;
+            let WMC = FPC;
+            let RFC = Math.random() * FPC;
+            let DIT = Math.random() * method.Relationships.inheritance;
+            let NOC = 1 - Math.random() * method.Relationships.inheritance;
+            let CBO = Math.random() * method.Relationships.aggregation;
+            let CRE = .12 * WMC + .04 * RFC + .27 * DIT + .36 * NOC + .21 * CBO;
+
+            result.push({
+                Method: method.Name,
+                DMC: DMC,
+                CRE: CRE,
+                Keef: DMC/CRE,
+            })
+        });
+        return result;
     }
+
     @Get('upload')
     root(@Request() req): string {
         console.log(req);
         return this.appService.root();
     }
+
     @Post('/upload2')
     @UseInterceptors(FileInterceptor('file', {
         storage: diskStorage({

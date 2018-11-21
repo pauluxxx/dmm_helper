@@ -31,7 +31,7 @@
     "@vue/test-utils": "^1.0.0-beta.20",
     "chai": "^4.1.2",
     "lint-staged": "^7.2.2",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.10.0",
     "sass-loader": "^7.0.1",
     "vue-cli-plugin-bootstrap-vue": "^0.1.0",
     "vue-cli-plugin-vuex-module-generator": "^0.1.1",

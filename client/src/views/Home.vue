@@ -62,6 +62,7 @@
         methods: {
             processData() {
                 this.$store.dispatch('PROCESS_DATA', {"methods": this.allMethods})
+
             },
         },
         components: {

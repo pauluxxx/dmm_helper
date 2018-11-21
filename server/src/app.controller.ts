@@ -1,15 +1,24 @@
-import {Get, Controller, Request, Response, Post} from '@nestjs/common';
+import {Get, Controller, Request, Response, Post, Render} from '@nestjs/common';
 import {AppService} from './app.service';
 import {UseInterceptors, FileInterceptor, UploadedFile} from '@nestjs/common'
 import {diskStorage} from 'multer'
 import {extname} from 'path'
+import * as fs from 'fs';
 
-@Controller('api')
+@Controller()
 export class AppController {
     constructor(private readonly appService: AppService) {
     }
 
-    @Post('/process')
+    @Get()
+    @Render('index')
+    async root() {
+        let app = '2';
+        app = await fs.readFileSync('../client/dist/index.html').toString()
+        return {app: app, message: 'ssws'};
+    }
+
+    @Post('api/process')
     processData(@Request() req): any[] {
         let result = [];
         req.body.methods.map((method) => {
@@ -40,16 +49,10 @@ export class AppController {
                 Method: method.Name,
                 DMC: DMC,
                 CRE: CRE,
-                Keef: DMC/CRE,
+                Keef: DMC / CRE,
             })
         });
         return result;
-    }
-
-    @Get('upload')
-    root(@Request() req): string {
-        console.log(req);
-        return this.appService.root();
     }
 
     @Post('/upload2')
